@@ -42,3 +42,14 @@ CREATE TABLE user(
     password VARCHAR(200),
     active BOOLEAN
 ); 
+
+
+Modif compte : 
+- prenom
+- nom
+- mdp
+
+Modif post : 
+- titre
+- ajout/suppr image
+

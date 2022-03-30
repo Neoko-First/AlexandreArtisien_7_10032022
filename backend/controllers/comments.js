@@ -38,7 +38,7 @@ exports.getAllComments = (req, res, next) => {
 
 // récupération des commentaires associés à un post
 exports.getPostComments = (req, res, next) => {
-  const reqGetAllComments = "SELECT * FROM comments WHERE postId = ?";
+  const reqGetAllComments = "SELECT * FROM comments WHERE postId = ? ORDER BY createdDate DESC";
   db.query(reqGetAllComments, [req.params.postId], (err, result) => {
     if (!result || result.length === 0) {
       res.status(201).json(result);

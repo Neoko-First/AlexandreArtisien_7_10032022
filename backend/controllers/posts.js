@@ -8,7 +8,6 @@ const fs = require("fs");
 
 // ajout d'un post
 exports.createPost = (req, res, next) => {
-  console.log(req.body);
   // si aucune image n'a été fournie par l'utilisateur, le post ne comporte pas d'image, on ajoute donc un champs null
   let pictureUrl = null;
   // sinon le nom du fichier

@@ -205,15 +205,14 @@ exports.updateUser = async (req, res, next) => {
       if (result) {
         res.status(200).json(result);
       }
-      // res.status(201).json({ message: "Modification effectuée" });
     });
   }
 
-  // Si la modification du prenom et du nom est demandée
-  if (req.body.newFirstname && req.body.newLastname) {
-    const { newFirstname, newLastname } = req.body;
-    const reqUpdateNameSql = `UPDATE user SET first_name = "${newFirstname}", last_name = "${newLastname}" WHERE id = ${req.params.id};`;
-    db.query(reqUpdateNameSql, async (err, result) => {
+  // Si la modification du prenom est demandée
+  if (req.body.newFirstName) {
+    const { newFirstName } = req.body;
+    const reqUpdateFirstNameSql = `UPDATE user SET first_name = "${newFirstName}" WHERE id = ${req.params.id};`;
+    db.query(reqUpdateFirstNameSql, async (err, result) => {
       if (err) {
         res.status(404).json({ err });
         throw err;
@@ -221,7 +220,21 @@ exports.updateUser = async (req, res, next) => {
       if (result) {
         res.status(200).json(result);
       }
-      // res.status(201).json({ message: "Modification effectuée" });
+    });
+  }
+
+  // Si la modification du nom est demandée
+  if (req.body.newLastName) {
+    const { newLastName } = req.body;
+    const reqUpdateLastNameSql = `UPDATE user SET last_name = "${newLastName}" WHERE id = ${req.params.id};`;
+    db.query(reqUpdateLastNameSql, async (err, result) => {
+      if (err) {
+        res.status(404).json({ err });
+        throw err;
+      }
+      if (result) {
+        res.status(200).json(result);
+      }
     });
   }
 };
