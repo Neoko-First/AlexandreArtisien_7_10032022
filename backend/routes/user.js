@@ -32,12 +32,12 @@ router.get("/", userCtrl.getAllUsers);
 router.get("/:id", userCtrl.getOneUser);
 
 // appel au controller de modification d'un user
-router.put("/:id", userCtrl.updateUser); 
+router.put("/:id", userCtrl.updateUser);
 
 // appel au controller de désactivation d'un user
 router.put("/disable/:id", userCtrl.disableUser);
 
 // upload
-router.post("/upload", upload.single('profil_image'), uploadCtrl.uploadProfil);
+router.post("/upload", upload.single("profil_image"), uploadCtrl.uploadProfil);
 
-module.exports = router; 
+module.exports = router;

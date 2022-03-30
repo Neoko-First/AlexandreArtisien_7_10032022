@@ -1,13 +1,14 @@
 // importe express
 const express = require("express");
-const bodyParser = require('body-parser');
+// helmet permet de parer un certains nombre de faille telles que les failles XSS
+const helmet = require("helmet");
+// lecture des corps des requêtes (en JSON)
+const bodyParser = require("body-parser");
 // décodage des cookies
-const cookieParser = require('cookie-parser');
-// importe path qui permet de connaitre le chemin du système de fichier
-const path = require("path");
+const cookieParser = require("cookie-parser");
 
-// middleware de verrificaiton des informations utilisateurs 
-const {checkUser, requireAuth} = require('./middleware/auth.middleware');
+// middleware de verrificaiton des informations utilisateurs
+const { checkUser, requireAuth } = require("./middleware/auth.middleware");
 
 // importe les routes
 const userRoutes = require("./routes/user");
@@ -23,7 +24,8 @@ require("dotenv").config();
 // crée une application express
 const app = express();
 
-// Middlewares
+// utilisation de helmet sur toutes les routes
+app.use(helmet());
 
 // Middleware Header pour contourner les erreurs en débloquant certains systèmes de sécurité CORS, afin que tout le monde puisse faire des requetes depuis son navigateur
 app.use((req, res, next) => {
@@ -35,7 +37,7 @@ app.use((req, res, next) => {
     "Origin, X-Requested-With, Content, Accept, Content-Type, Authorization"
   );
   // on indique les méthodes autorisées pour les requêtes HTTP
-  res.setHeader( 
+  res.setHeader(
     "Access-Control-Allow-Methods",
     "GET, POST, PUT, DELETE, PATCH, OPTIONS"
   );
@@ -47,19 +49,18 @@ app.use((req, res, next) => {
 // affiche le corps de la requête
 app.use(express.json());
 
+// Prise en charge du JSON.
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
+// Prise en charge des formulaires HTML.
+app.use(bodyParser.urlencoded({ extended: true }));
 // lire les cookies
 app.use(cookieParser());
- 
-// jwt
-app.get('*', checkUser); // appelé sur chaque page
-app.get('/api/jwtid', requireAuth, (req, res) => { 
-  res.status(200).send(res.locals.user[0])
-}); 
- 
-// répond aux requêtes envoyées à "/images"
-app.use("/images", express.static(path.join(__dirname, "images")));
+
+// Verrifie si le user est connécté
+app.get("*", checkUser); // appelé sur chaque page
+app.get("/api/jwtid", requireAuth, (req, res) => {
+  res.status(200).send(res.locals.user[0]);
+});
 
 // Utilise les midleware importés depuis notre fichier routes
 app.use("/api/auth", userRoutes);

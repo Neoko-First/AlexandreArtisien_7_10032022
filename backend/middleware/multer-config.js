@@ -20,38 +20,12 @@ const storage = multer.diskStorage({
   },
   // indique à multer d'utiliser le nom d'origine, de remplacer les espaces par des underscores et d'ajouter un timestamp Date.now() comme nom de fichier
   filename: (req, file, callback) => {
-    // En fonction de la provenance de l'image (de profil ou de post), les traitements ne vont pas être les mêmes
-    // if (file.fieldname === "post_image") {
-    //   const extension = MIME_TYPES[file.mimetype];
-    //   callback(null, Date.now() + "." + extension);
-    // } else if (file.fieldname === "profil_image") {
-    //   console.log(req.body.name);
-    //   // utilisation ensuite de la constante dictionnaire de type MIME pour résoudre l'extension de fichier appropriée
-    //   const extension = MIME_TYPES[file.mimetype];
-    //   // pocède à l'enregistrement
-    //   callback(null, req.body.name + "." + extension);
-    // }
-
+    // nom du fichier en remplaçant les potentiels espaces par des "_"
     const name = file.originalname.split(' ').join('_');
+    // renseigne l'extension (mime type) du fichier 
     const extension = MIME_TYPES[file.mimetype];
-    callback(null, name + Date.now() + '.' + extension);
-
-    // En fonction de la provenance de l'image (de profil ou de post), les traitements ne vont pas être les mêmes
-    // if (file.fieldname === "post_image") {
-    //   // utilisation ensuite de la constante dictionnaire de type MIME pour résoudre l'extension de fichier appropriée
-    //   const extension = MIME_TYPES[file.mimetype];
-    //   // pocède à l'enregistrement
-    //   callback(null, Date.now() + "." + extension);
-
-    //   console.log(extension);
-    // } else if (file.fieldname === "profil_image") {
-    //   // utilisation ensuite de la constante dictionnaire de type MIME pour résoudre l'extension de fichier appropriée
-    //   const extension = MIME_TYPES[file.mimetype];
-    //   console.log(extension);
-    //   // pocède à l'enregistrement
-    //   callback(null, req.body.name.split(" ").join('_') + "." + extension);
-
-    // }
+    // définit le nom de fichier 
+    callback(null, Date.now() + '.' + extension);
   },
 });
 

@@ -1,8 +1,10 @@
 // Appel de .env pour utiliser les variables d'environnement (npm install dotenv --save)
 require("dotenv").config({ path: "./config/.env" });
 
+// import de MySQL
 const mysql = require("mysql");
 
+// paramètres de connexion à la BDD
 const db = mysql.createConnection({
   host: "localhost",
   user: "root",
@@ -10,6 +12,7 @@ const db = mysql.createConnection({
   database: "groupomaniadb",
 }); 
 
+// export pour utiliser cette connexion 
 module.exports.getDB = () => {
   return db;
 };

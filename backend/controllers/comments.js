@@ -4,12 +4,14 @@ const db = dbConfig.getDB();
 
 // ajout d'un commentaire
 exports.createComment = (req, res, next) => {
+  // récupération du corps de la requête
   let body = {
     postId: req.body.postId,
     commenterId: req.body.commenterId,
     content: req.body.content,
     createdDate: new Date(),
   };
+  // ajout de l'objet commentaire en BDD
   const reqCreateComment = "INSERT INTO comments SET ?";
   db.query(reqCreateComment, body, (err, result) => {
     if (!result) {

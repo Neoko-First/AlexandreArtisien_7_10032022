@@ -4,6 +4,7 @@ var passwordValidator = require("password-validator");
 // Création du schéma de verrification
 var schema = new passwordValidator();
 
+// middleware de verrification de la force du mot de passe 
 module.exports = (req, res, next) => {
   // création des règles du schéma
   schema
@@ -33,6 +34,7 @@ module.exports = (req, res, next) => {
     // permission accordée
     next();
   } else {
+    // erreur recup et affichées en front 
     res.status(200).json({
       errors: {
         email: "",

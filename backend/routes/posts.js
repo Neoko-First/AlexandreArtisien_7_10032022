@@ -20,7 +20,7 @@ router.get("/:id", postsCtrl.getOnePost);
 router.post("/", upload.single("post_image"), postsCtrl.createPost);
 
 // Middleware de modification d'un post
-router.put("/:id", postsCtrl.updatePost); 
+router.put("/:id", postsCtrl.updatePost);
 
 // Middleware de suppression d'un post
 router.delete("/:id", postsCtrl.deletePost);

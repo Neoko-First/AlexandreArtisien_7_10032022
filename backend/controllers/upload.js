@@ -2,6 +2,7 @@
 const dbConfig = require("../config/db");
 const db = dbConfig.getDB();
 
+// controller permettant de modifier la photo de profil d'un user en BDD
 module.exports.uploadProfil = (req, res) => {
   let pictureUrl = req.file.filename;
 

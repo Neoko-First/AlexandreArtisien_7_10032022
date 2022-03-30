@@ -8,21 +8,21 @@ const router = express.Router();
 const commentCtrl = require("../controllers/comments");
 
 // Middleware de création d'un commentaire
-router.post("/", commentCtrl.createComment); 
- 
+router.post("/", commentCtrl.createComment);
+
 // Middleware de récupération des commentaires
-router.get("/", commentCtrl.getAllComments); 
+router.get("/", commentCtrl.getAllComments);
 
 // Middleware de récupération des commentaires associés à un post
-router.get("/:postId", commentCtrl.getPostComments); 
+router.get("/:postId", commentCtrl.getPostComments);
 
 // Middleware de modification d'un commentaire
-router.put("/:id", commentCtrl.updatePostComment); 
+router.put("/:id", commentCtrl.updatePostComment);
 
 // Middleware de suppression d'un commentaire
-router.delete("/:id", commentCtrl.deleteComment); 
+router.delete("/:id", commentCtrl.deleteComment);
 
 // Middleware de suppression d'un commentaire
-router.delete("/byPost/:postId", commentCtrl.deleteCommentOfPost); 
+router.delete("/byPost/:postId", commentCtrl.deleteCommentOfPost);
 
 module.exports = router;

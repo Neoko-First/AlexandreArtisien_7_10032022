@@ -41,7 +41,7 @@ const errorHandler = (error) => {
   }
 };
 
-// crée le serveur
+// crée le serveur et défini l'app qui va tourner sur celui-ci
 const server = http.createServer(app);
 
 // écoute d'erreurs diverses 
