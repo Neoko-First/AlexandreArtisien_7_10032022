@@ -55,7 +55,7 @@ exports.getOnePost = (req, res, next) => {
 
 // modification d'un post existant
 exports.updatePost = (req, res, next) => {
-  const reqUpdateSql = `UPDATE posts SET description = "${req.body.description}" WHERE id = ${req.params.id}`;
+  const reqUpdateSql = `UPDATE posts SET title = "${req.body.title}", description = "${req.body.description}" WHERE id = ${req.params.id}`;
   db.query(reqUpdateSql, (err, result) => {
     if (!result) {
       res.status(200).json({ err });
@@ -63,7 +63,7 @@ exports.updatePost = (req, res, next) => {
       res.status(201).json(result);
     }
   });
-};
+}; 
 
 // suppression d'un post existant
 exports.deletePost = (req, res, next) => {
